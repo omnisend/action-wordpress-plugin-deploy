@@ -31,6 +31,12 @@ if [[ -z "$VERSION" ]]; then
 	VERSION="${GITHUB_REF#refs/tags/}"
 	VERSION="${VERSION#v}"
 fi
+
+if [[ -z "$VERSION" ]]; then
+	echo "Run this action using a tag instead of a branch"
+	exit 1
+fi
+
 echo "ℹ︎ VERSION is $VERSION"
 
 if [[ -z "$ASSETS_DIR" ]]; then
