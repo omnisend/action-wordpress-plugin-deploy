@@ -26,15 +26,14 @@ if [[ -z "$SLUG" ]]; then
 fi
 echo "ℹ︎ SLUG is $SLUG"
 
-# Does it even make sense for VERSION to be editable in a workflow definition?
-if [[ -z "$VERSION" ]]; then
-	VERSION="${GITHUB_REF#refs/tags/}"
-	VERSION="${VERSION#v}"
+if [[ ! "$GITHUB_TAG" == refs/tags/* ]] ; then
+	echo "Run this action using a tag instead of a branch"
+	exit 1
 fi
 
 if [[ -z "$VERSION" ]]; then
-	echo "Run this action using a tag instead of a branch"
-	exit 1
+	VERSION="${GITHUB_REF#refs/tags/}"
+	VERSION="${VERSION#v}"
 fi
 
 echo "ℹ︎ VERSION is $VERSION"
