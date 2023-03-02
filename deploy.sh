@@ -26,7 +26,7 @@ if [[ -z "$SLUG" ]]; then
 fi
 echo "ℹ︎ SLUG is $SLUG"
 
-if [[ ! "$GITHUB_TAG" == refs/tags/* ]] ; then
+if [[ "$GITHUB_REF" != refs/tags/* ]] ; then
 	echo "Run this action using a tag instead of a branch"
 	exit 1
 fi
