@@ -56,6 +56,13 @@ if [[ "$BUILD_DIR" != false ]]; then
 	echo "ℹ︎ BUILD_DIR is $BUILD_DIR"
 fi
 
+# Check if SVN is installed
+if ! command -v svn &> /dev/null
+then
+    echo "Subversion (svn) is not installed. Installing..."
+    sudo apt-get update && sudo apt-get install -y subversion
+fi
+
 SVN_URL="https://plugins.svn.wordpress.org/${SLUG}/"
 SVN_DIR="${HOME}/svn-${SLUG}"
 
